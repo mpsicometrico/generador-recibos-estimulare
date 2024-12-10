@@ -1,4 +1,4 @@
-import { User } from '@modules/users/users.entity';
+import { User } from '@modules/patient/entity';
 
 export interface JwtPayload {
   sub: number;

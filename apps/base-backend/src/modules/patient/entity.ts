@@ -1,24 +1,21 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User {
+export class Patient {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ length: 100 })
-  name: string;
+  patient: string;
 
   @Column({ length: 100 })
-  lastName: string;
+  father: string;
 
-  @Column({ unique: true, length: 100 })
-  email: string;
+  @Column({ length: 100 })
+  mother: string;
 
   @Column()
-  password: string;
-
-  @Column({ default: true })
-  isActive: boolean;
+  school: string;
 
   @Column({
     type: 'timestamp without time zone',

@@ -7,13 +7,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
-import { User } from './users.entity';
-import { CreateUserDTO, UpdateUserDTO } from './users.dto';
+import { User } from './entity';
+import { CreateUserDTO, UpdateUserDTO } from './dto';
 
 const saltOrRounds = 10;
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}

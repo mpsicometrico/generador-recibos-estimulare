@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { UsersModule } from './modules/users/users.module';
+import { UserModule } from './modules/patient/module';
 import { TypeOrmConfigService } from './database/database.service';
 import { AuthModule } from './auth/auth.module';
 
@@ -14,7 +14,7 @@ import { AuthModule } from './auth/auth.module';
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
     }),
-    UsersModule,
+    UserModule,
     AuthModule,
   ],
 })
