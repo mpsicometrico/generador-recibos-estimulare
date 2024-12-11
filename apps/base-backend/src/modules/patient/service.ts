@@ -1,66 +1,42 @@
-import {
-  ConflictException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 
-import { User } from './entity';
-import { CreateUserDTO, UpdateUserDTO } from './dto';
-
-const saltOrRounds = 10;
+import { Patient } from './entity';
+import { CreatePatientDTO, UpdatePatientDTO } from './dto';
 
 @Injectable()
-export class UserService {
-  constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
-  ) {}
+export class PatientService {
+  constructor(@InjectRepository(Patient) private repo: Repository<Patient>) {}
 
-  async getUsers(): Promise<User[]> {
-    return this.userRepository.find({ where: { isActive: true } });
+  async getAll(): Promise<Patient[]> {
+    return this.repo.find();
   }
 
-  async createUser(body: CreateUserDTO): Promise<User> {
-    const user = await this.userRepository.findOne({
-      where: { email: body.email },
-    });
-    if (user)
-      throw new ConflictException('El correo ya se encuentra registrado.');
-
+  async create(body: CreatePatientDTO): Promise<Patient> {
     const payload = {
       ...body,
-      password: await bcrypt.hash(body.password, saltOrRounds),
     };
 
-    const newUser = this.userRepository.create(payload);
-    return this.userRepository.save(newUser);
+    const newUser = this.repo.create(payload);
+    return await this.repo.save(newUser);
   }
 
-  async findUserById(id: number): Promise<User> {
-    const user = await this.userRepository.findOne({ where: { id } });
-    if (user === null) {
+  async findById(id: number): Promise<Patient> {
+    const patient = await this.repo.findOne({ where: { id } });
+    if (patient === null) {
       throw new NotFoundException('Usuario no encontrado.');
     }
-    return user;
+    return patient;
   }
 
-  async findUserByEmail(email: string): Promise<User> {
-    const user = await this.userRepository.findOne({ where: { email } });
-    if (user === null) {
-      throw new NotFoundException('Usuario no encontrado.');
-    }
-    return user;
+  async update(body: UpdatePatientDTO, id: number): Promise<Patient> {
+    const patient = await this.findById(id);
+    return this.repo.save({ ...patient, ...body });
   }
 
-  async updateUser(body: UpdateUserDTO, id: number): Promise<User> {
-    const user = await this.findUserById(id);
-    return this.userRepository.save({ ...user, ...body });
-  }
-
-  async deleteUser(id: number): Promise<User> {
-    const user = await this.findUserById(id);
-    return this.userRepository.save({ ...user, isActive: false });
+  async delete(id: number): Promise<Patient> {
+    const patient = await this.findById(id);
+    return this.repo.save({ ...patient, isActive: false });
   }
 }

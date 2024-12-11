@@ -5,17 +5,20 @@ export class Patient {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 100 })
-  patient: string;
+  @Column({ length: 100, type: 'varchar' })
+  name: string;
 
-  @Column({ length: 100 })
+  @Column({ length: 100, type: 'varchar', nullable: true })
   father: string;
 
-  @Column({ length: 100 })
+  @Column({ length: 100, type: 'varchar', nullable: true })
   mother: string;
 
-  @Column()
+  @Column({ length: 100, type: 'varchar', nullable: true })
   school: string;
+
+  @Column({ default: true, type: 'boolean' })
+  isActive: boolean;
 
   @Column({
     type: 'timestamp without time zone',

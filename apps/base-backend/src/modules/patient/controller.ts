@@ -7,10 +7,10 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { UserService } from './service';
+import { PatientService } from './service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { CreateUserDTO, UpdateUserDTO } from './dto';
+import { CreatePatientDTO, UpdatePatientDTO } from './dto';
 import { type Patient } from './entity';
 import { Public } from 'decorators/isPublic.decorator';
 
@@ -18,35 +18,35 @@ import { Public } from 'decorators/isPublic.decorator';
 @ApiBearerAuth()
 @Controller('patient')
 export class PatientController {
-  constructor(private userService: UserService) {}
+  constructor(private service: PatientService) {}
 
   @Get()
   getUser(): Promise<Patient[]> {
-    return this.userService.getUsers();
+    return this.service.getAll();
   }
 
   @Get(':id')
   getUserById(@Param('id', ParseIntPipe) id: number): Promise<Patient> {
-    return this.userService.findUserById(id);
+    return this.service.findById(id);
   }
 
   @Public()
   @ApiBearerAuth('false')
   @Post()
-  createUser(@Body() createUserDTO: CreateUserDTO): Promise<Patient> {
-    return this.userService.createUser(createUserDTO);
+  createUser(@Body() payload: CreatePatientDTO): Promise<Patient> {
+    return this.service.create(payload);
   }
 
   @Patch(':id')
   updateUser(
-    @Body() updateUserDTO: UpdateUserDTO,
-    @Param('id') id: number,
-  ): Promise<Patient | string> {
-    return this.userService.updateUser(updateUserDTO, id);
+    @Body() payload: UpdatePatientDTO,
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Patient> {
+    return this.service.update(payload, id);
   }
 
   @Patch('delete/:id')
   deleteUser(@Param('id', ParseIntPipe) id: number): Promise<Patient> {
-    return this.userService.deleteUser(id);
+    return this.service.delete(id);
   }
 }
