@@ -2,8 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Patient } from './entity';
-import { CreatePatientDTO, UpdatePatientDTO } from './dto';
+import { Patient } from './patient.entity';
+import { CreatePatientDTO, UpdatePatientDTO } from './patient.dto';
 
 @Injectable()
 export class PatientService {
@@ -18,8 +18,8 @@ export class PatientService {
       ...body,
     };
 
-    const newUser = this.repo.create(payload);
-    return await this.repo.save(newUser);
+    const newPatient = this.repo.create(payload);
+    return await this.repo.save(newPatient);
   }
 
   async findById(id: number): Promise<Patient> {

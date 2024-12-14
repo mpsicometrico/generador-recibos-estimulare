@@ -1,1 +1,0 @@
-export { getDesignTokens } from "./getDesignTokens";

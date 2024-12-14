@@ -1,25 +1,22 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreatePatientDTO {
   @ApiProperty({ example: 'Santiago Pérez Campos' })
   @IsString()
   @IsNotEmpty()
-  readonly patient: string;
+  readonly name: string;
 
   @ApiProperty({ example: 'Javier Pérez' })
   @IsString()
-  @IsNotEmpty()
   readonly father: string;
 
   @ApiProperty({ example: 'Gabriela Campos' })
-  @IsEmail()
-  @IsNotEmpty()
+  @IsString()
   readonly mother: string;
 
   @ApiProperty({ example: 'Escuela Primaria no° 75' })
   @IsString()
-  @IsNotEmpty()
   readonly school: string;
 }
 

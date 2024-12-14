@@ -15,6 +15,8 @@ async function bootstrap(): Promise<void> {
     }),
   );
 
+  app.enableCors();
+
   const config = new DocumentBuilder()
     .setTitle('Auth Base')
     .setDescription('API description for Auth Base')
@@ -28,6 +30,6 @@ async function bootstrap(): Promise<void> {
     },
   });
 
-  await app.listen(configService.get('PORT') ?? 3000);
+  await app.listen(configService.get('APP_PORT') ?? 5001);
 }
 bootstrap();
