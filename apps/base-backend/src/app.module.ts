@@ -6,6 +6,7 @@ import { PatientModule } from './modules/patient/patient.module';
 import { TypeOrmConfigService } from './database/database.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './modules/user/user.module';
+import { InvoiceModule } from './modules/invoice/invoice.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from './modules/user/user.module';
     UserModule,
     AuthModule,
     PatientModule,
+    InvoiceModule,
   ],
 })
 export class AppModule {}
