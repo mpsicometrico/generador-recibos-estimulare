@@ -8,7 +8,7 @@ export class Invoice {
   @Column({ length: 100, type: 'varchar' })
   type: string;
 
-  @Column({ type: 'real' })
+  @Column({ type: 'numeric', precision: 6, scale: 2 })
   price: number;
 
   @Column({
