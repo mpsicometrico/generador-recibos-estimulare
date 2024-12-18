@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -14,39 +15,39 @@ import { CreateUserDTO, UpdateUserDTO } from './user.dto';
 import { type User } from './user.entity';
 import { Public } from 'decorators/isPublic.decorator';
 
-@ApiTags('users')
+@ApiTags('user')
 @ApiBearerAuth()
-@Controller('users')
+@Controller('user')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private repo: UserService) {}
 
   @Get()
-  getUsers(): Promise<User[]> {
-    return this.userService.getAll();
+  getAll(): Promise<User[]> {
+    return this.repo.getAll();
   }
 
   @Get(':id')
-  getUserById(@Param('id', ParseIntPipe) id: number): Promise<User> {
-    return this.userService.findById(id);
+  getById(@Param('id', ParseIntPipe) id: number): Promise<User> {
+    return this.repo.findById(id);
   }
 
-  @Public()
-  @ApiBearerAuth('false')
+  // @Public()
+  // @ApiBearerAuth('false')
   @Post()
-  createUser(@Body() createUserDTO: CreateUserDTO): Promise<User> {
-    return this.userService.create(createUserDTO);
+  create(@Body() createUserDTO: CreateUserDTO): Promise<User> {
+    return this.repo.create(createUserDTO);
   }
 
   @Patch(':id')
-  updateUser(
+  update(
     @Body() updateUserDTO: UpdateUserDTO,
     @Param('id') id: number,
-  ): Promise<User | string> {
-    return this.userService.update(updateUserDTO, id);
+  ): Promise<User> {
+    return this.repo.update(updateUserDTO, id);
   }
 
-  @Patch('delete/:id')
+  @Delete('delete/:id')
   deleteUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
-    return this.userService.delete(id);
+    return this.repo.delete(id);
   }
 }

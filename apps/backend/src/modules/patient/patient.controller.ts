@@ -20,11 +20,13 @@ import { Public } from 'decorators/isPublic.decorator';
 export class PatientController {
   constructor(private service: PatientService) {}
 
+  @Public()
   @Get()
   get(): Promise<Patient[]> {
     return this.service.getAll();
   }
 
+  @Public()
   @Get(':id')
   getById(@Param('id', ParseIntPipe) id: number): Promise<Patient> {
     return this.service.findById(id);
@@ -37,6 +39,7 @@ export class PatientController {
     return this.service.create(payload);
   }
 
+  @Public()
   @Patch(':id')
   update(
     @Body() payload: UpdatePatientDTO,
@@ -45,6 +48,7 @@ export class PatientController {
     return this.service.update(payload, id);
   }
 
+  @Public()
   @Patch('delete/:id')
   delete(@Param('id', ParseIntPipe) id: number): Promise<Patient> {
     return this.service.delete(id);

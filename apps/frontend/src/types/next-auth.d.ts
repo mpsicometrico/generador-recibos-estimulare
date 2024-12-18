@@ -9,7 +9,7 @@ declare module 'next-auth' {
   }
 
   interface Session {
-    access_token: string
+    token: string
     // exp: number;
     // expires: string;
     // expires_in: number;
@@ -22,7 +22,7 @@ declare module 'next-auth' {
 
 declare module 'next-auth/jwt' {
   type JWT = {
-    access_token: string
+    token: string
     expires: string
     exp: number
     iat: number

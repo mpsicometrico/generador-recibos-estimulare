@@ -19,11 +19,13 @@ import { Public } from 'decorators/isPublic.decorator';
 export class InvoiceController {
   constructor(private service: InvoiceService) {}
 
+  @Public()
   @Get()
   get(): Promise<Invoice[]> {
     return this.service.getAll();
   }
 
+  @Public()
   @Get(':id')
   getById(@Param('id', ParseIntPipe) id: number): Promise<Invoice> {
     return this.service.findById(id);

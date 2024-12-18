@@ -14,16 +14,17 @@ const saltOrRounds = 10;
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
-  ) {}
+  constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
   async getAll(): Promise<User[]> {
-    return this.userRepository.find({ where: { isActive: true } });
+    return this.repo.find({
+      where: { isActive: true },
+      select: ['id', 'email', 'name', 'lastName', 'isActive'],
+    });
   }
 
   async create(body: CreateUserDTO): Promise<User> {
-    const user = await this.userRepository.findOne({
+    const user = await this.repo.findOne({
       where: { email: body.email },
     });
     if (user)
@@ -34,12 +35,12 @@ export class UserService {
       password: await bcrypt.hash(body.password, saltOrRounds),
     };
 
-    const newUser = this.userRepository.create(payload);
-    return this.userRepository.save(newUser);
+    const newUser = this.repo.create(payload);
+    return this.repo.save(newUser);
   }
 
   async findById(id: number): Promise<User> {
-    const user = await this.userRepository.findOne({ where: { id } });
+    const user = await this.repo.findOne({ where: { id } });
     if (user === null) {
       throw new NotFoundException('Usuario no encontrado.');
     }
@@ -47,7 +48,7 @@ export class UserService {
   }
 
   async findByEmail(email: string): Promise<User> {
-    const user = await this.userRepository.findOne({ where: { email } });
+    const user = await this.repo.findOne({ where: { email } });
     if (user === null) {
       throw new NotFoundException('Usuario no encontrado.');
     }
@@ -56,11 +57,11 @@ export class UserService {
 
   async update(body: UpdateUserDTO, id: number): Promise<User> {
     const user = await this.findById(id);
-    return this.userRepository.save({ ...user, ...body });
+    return this.repo.save({ ...user, ...body });
   }
 
   async delete(id: number): Promise<User> {
     const user = await this.findById(id);
-    return this.userRepository.save({ ...user, isActive: false });
+    return this.repo.save({ ...user, isActive: false });
   }
 }

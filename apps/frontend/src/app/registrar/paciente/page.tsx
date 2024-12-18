@@ -2,6 +2,7 @@
 
 import { registerPatient } from '@actions/registerPatient'
 import { Form, Input } from '@components/index'
+import Select from '@components/select'
 
 export default function RegisterPatient() {
   return (
@@ -12,6 +13,7 @@ export default function RegisterPatient() {
           <Input id='father' label='Nombre de papá' />
           <Input id='mother' label='Nombre de mamá' />
           <Input id='school' label='Nombre de la escuela' />
+          <Select id='psychologist' label='Psicóloga / psicólogo' />
         </Form>
       </main>
     </div>
