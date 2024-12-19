@@ -40,6 +40,12 @@ export class PatientController {
   }
 
   @Public()
+  @Get('select/options')
+  async getSelectOptions() {
+    return await this.service.getSelectOptions();
+  }
+
+  @Public()
   @Patch(':id')
   update(
     @Body() payload: UpdatePatientDTO,

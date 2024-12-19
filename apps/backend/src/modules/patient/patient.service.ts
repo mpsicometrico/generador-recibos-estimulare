@@ -18,7 +18,10 @@ export class PatientService {
       ...body,
     };
 
-    const newPatient = this.repo.create(payload);
+    const newPatient = this.repo.create({
+      ...payload,
+      psychologist: { id: body.psychologistId },
+    });
     return await this.repo.save(newPatient);
   }
 
@@ -28,6 +31,18 @@ export class PatientService {
       throw new NotFoundException('Usuario no encontrado.');
     }
     return patient;
+  }
+
+  async getSelectOptions() {
+    const elements = await this.repo.find({
+      where: { isActive: true },
+      select: ['id', 'name', 'father', 'mother'],
+    });
+
+    return elements.map(({ id, name, father, mother }) => ({
+      id: id,
+      label: `${name}${father != null ? `- ${father}` : ''}${mother != null ? ` ${mother}` : ''}`,
+    }));
   }
 
   async update(body: UpdatePatientDTO, id: number): Promise<Patient> {

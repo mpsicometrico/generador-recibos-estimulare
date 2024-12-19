@@ -1,14 +1,16 @@
+import { Patient } from '../patient/patient.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
 export class Psychologist {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 100 })
@@ -17,7 +19,7 @@ export class Psychologist {
   @Column({ type: 'varchar', length: 100 })
   lastName: string;
 
-  @Column({ type: 'varchar', length: 100, unique: true })
+  @Column({ type: 'varchar', length: 100, unique: true, nullable: true })
   email: string;
 
   @Column({ default: true })
@@ -28,4 +30,7 @@ export class Psychologist {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Patient, (patient) => patient.psychologist)
+  patients: Patient[];
 }

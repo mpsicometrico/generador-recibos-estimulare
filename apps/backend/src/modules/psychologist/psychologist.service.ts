@@ -23,7 +23,9 @@ export class PsychologistService {
       where: { email: createPsychologistDto.email },
     });
     if (exists)
-      throw new ConflictException('El correo ya se encuentra registrado.');
+      throw new ConflictException({
+        message: 'El correo ya se encuentra registrado.',
+      });
 
     const psychologist = this.repo.create(createPsychologistDto);
     return await this.repo.save(psychologist);

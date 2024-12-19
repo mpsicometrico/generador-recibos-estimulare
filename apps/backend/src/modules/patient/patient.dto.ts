@@ -1,5 +1,11 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreatePatientDTO {
   @ApiProperty({ example: 'Santiago Pérez Campos' })
@@ -9,15 +15,22 @@ export class CreatePatientDTO {
 
   @ApiProperty({ example: 'Javier Pérez' })
   @IsString()
-  readonly father: string;
+  @IsOptional()
+  readonly father?: string;
 
   @ApiProperty({ example: 'Gabriela Campos' })
   @IsString()
-  readonly mother: string;
+  @IsOptional()
+  readonly mother?: string;
 
   @ApiProperty({ example: 'Escuela Primaria no° 75' })
   @IsString()
-  readonly school: string;
+  @IsOptional()
+  readonly school?: string;
+
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  readonly psychologistId: number;
 }
 
 export class UpdatePatientDTO extends PartialType(CreatePatientDTO) {

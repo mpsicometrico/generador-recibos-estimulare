@@ -1,7 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDecimal, IsNotEmpty, IsString } from 'class-validator';
+import { IsDecimal, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateInvoiceDTO {
+  @ApiProperty({ example: '1' })
+  @IsNumber()
+  @IsNotEmpty()
+  readonly patientId: number;
+
   @ApiProperty({ example: 'Psicoterapia' })
   @IsString()
   @IsNotEmpty()

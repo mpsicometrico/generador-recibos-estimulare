@@ -18,7 +18,10 @@ export class InvoiceService {
       ...body,
     };
 
-    const newInvoice = this.repo.create(payload);
+    const newInvoice = this.repo.create({
+      ...payload,
+      patient: { id: body.patientId },
+    });
     return await this.repo.save(newInvoice);
   }
 

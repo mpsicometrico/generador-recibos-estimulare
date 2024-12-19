@@ -1,4 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
+
+import { Invoice } from '../invoice/invoice.entity';
+import { Psychologist } from '../psychologist/psychologist.entity';
 
 @Entity()
 export class Patient {
@@ -25,4 +34,10 @@ export class Patient {
     default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
+
+  @ManyToOne(() => Psychologist, (psychologist) => psychologist.patients)
+  psychologist: Psychologist;
+
+  @OneToMany(() => Invoice, (invoice) => invoice.patient)
+  invoices: Invoice[];
 }

@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreatePsychologistDTO {
   @ApiProperty({ example: 'Daniel' })
@@ -14,8 +14,8 @@ export class CreatePsychologistDTO {
 
   @ApiProperty({ example: 'daniel.orozco@estimulare.com' })
   @IsEmail()
-  @IsNotEmpty()
-  readonly email: string;
+  @IsOptional()
+  readonly email?: string;
 }
 
 export class UpdatePsychologistDTO extends PartialType(CreatePsychologistDTO) {}

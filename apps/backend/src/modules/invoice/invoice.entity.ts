@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Patient } from '../patient/patient.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Invoice {
@@ -16,4 +17,7 @@ export class Invoice {
     default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
+
+  @ManyToOne(() => Patient, (patient) => patient.invoices)
+  patient: Patient;
 }
