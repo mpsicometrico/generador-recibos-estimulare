@@ -9,12 +9,16 @@ import * as bcrypt from 'bcrypt';
 
 import { User } from './user.entity';
 import { CreateUserDTO, UpdateUserDTO } from './user.dto';
+import { MailerService } from '@nestjs-modules/mailer';
 
 const saltOrRounds = 10;
 
 @Injectable()
 export class UserService {
-  constructor(@InjectRepository(User) private repo: Repository<User>) {}
+  constructor(
+    @InjectRepository(User) private repo: Repository<User>,
+    private readonly mailService: MailerService,
+  ) {}
 
   async getAll(): Promise<User[]> {
     return this.repo.find({

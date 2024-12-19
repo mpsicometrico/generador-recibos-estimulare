@@ -13,7 +13,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { CreateUserDTO, UpdateUserDTO } from './user.dto';
 import { type User } from './user.entity';
-import { Public } from 'decorators/isPublic.decorator';
+// import { Public } from 'decorators/isPublic.decorator';
 
 @ApiTags('user')
 @ApiBearerAuth()
