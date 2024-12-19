@@ -1,6 +1,6 @@
 export enum Entities {
   Psychologist = 'psychologist',
   Patient = 'patient',
-  Appointment = 'appointment',
+  Invoice = 'invoice',
   User = 'user'
 }

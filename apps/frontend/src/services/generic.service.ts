@@ -8,8 +8,8 @@ export class GenericService {
     this.entity = entity
   }
 
-  register(patient: any) {
-    return axios.post(`${this.baseUrl}/${this.entity}`, patient)
+  register(payload: any) {
+    return axios.post(`${this.baseUrl}/${this.entity}`, payload)
   }
 
   getSelectOptions() {
