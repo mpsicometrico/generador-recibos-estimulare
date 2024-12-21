@@ -4,12 +4,12 @@ import { InvoiceService } from './invoice.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Invoice } from './invoice.entity';
-import { MailService } from '@modules/mail/mail.service';
+import { MailModule } from '@modules/mail/mail.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Invoice])],
+  imports: [TypeOrmModule.forFeature([Invoice]), MailModule],
   controllers: [InvoiceController],
-  providers: [InvoiceService, MailService],
+  providers: [InvoiceService],
   exports: [InvoiceService],
 })
 export class InvoiceModule {}

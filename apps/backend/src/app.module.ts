@@ -10,6 +10,7 @@ import { UserModule } from './modules/user/user.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
 import { PsychologistModule } from './modules/psychologist/psychologist.module';
 import { MailModule } from '@modules/mail/mail.module';
+import { PrinterModule } from './modules/printer/printer.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -24,6 +25,7 @@ import { MailModule } from '@modules/mail/mail.module';
     InvoiceModule,
     PsychologistModule,
     MailModule,
+    PrinterModule,
   ],
 })
 export class AppModule {}

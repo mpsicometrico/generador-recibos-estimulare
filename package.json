@@ -21,9 +21,5 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "dependencies": {
-    "@google-cloud/storage": "^7.14.0",
-    "pdfkit": "^0.15.2"
-  }
+  ]
 }

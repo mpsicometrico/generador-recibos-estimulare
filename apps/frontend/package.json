@@ -25,6 +25,7 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@repo/fonts": "*",
     "@types/node": "^20",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",

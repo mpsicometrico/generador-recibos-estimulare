@@ -4,14 +4,9 @@ import './globals.css'
 import { Toaster } from 'sonner'
 import { NavigationButtons } from '@components/navigation-buttons'
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900'
-})
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
+const interVariable = localFont({
+  src: './fonts/Inter-VariableFont_opsz,wght.ttf',
+  variable: '--font-inter-variable',
   weight: '100 900'
 })
 
@@ -27,9 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='es'>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
-      >
+      <body className={`${interVariable.className} antialiased relative`}>
         <NavigationButtons />
         {children}
         <Toaster richColors />
