@@ -7,6 +7,8 @@ import { Invoice } from '@modules/invoice/invoice.entity';
 import { ConfigService } from '@nestjs/config';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { PrinterService } from '@modules/printer/printer.service';
+import { toLocaleDateString } from 'utils/date-functions';
+import { createReadStream, createWriteStream, unlink } from 'fs';
 
 @Injectable()
 export class MailService {
@@ -28,13 +30,18 @@ export class MailService {
   }
 
   async sendMail(invoice: Invoice) {
-    const message = `Forgot your password? If you didn't forget your password, please ignore this email!`;
+    const { patient, type, createdAt } = invoice;
+
+    const message = `Recibo del pago recibido del paciente ${invoice.patient.name}`;
 
     const docDefinition: TDocumentDefinitions = {
       content: ['Testing', 'Estimulare'],
     };
 
     const pdf = this.printer.createPdf(docDefinition);
+
+    const path = `${__dirname}invoice.pdf`;
+    pdf.pipe(createWriteStream(path));
     pdf.end();
 
     const drive = google.drive({ version: 'v3', auth: this.oauth2Client });
@@ -68,26 +75,26 @@ export class MailService {
 
       await drive.files.create({
         requestBody: {
-          name: `recibo-${invoice.id}.pdf`,
+          name: `recibo-${invoice.patient.name}-${invoice.id}.pdf`,
           mimeType: 'application/pdf',
           parents: [remoteFolder.id],
         },
         media: {
           mimeType: 'application/pdf',
-          body: pdf,
+          body: createReadStream(path),
         },
       });
 
       this.mailService.sendMail({
         from: 'Estimulare <efren2851@gmail.com>',
         to: 'efren282@outlook.es',
-        subject: `Recibo #${invoice.id}`,
+        subject: `Recibo #${invoice.id} - ${patient.name} - ${type} - ${toLocaleDateString(createdAt)}`,
         text: message,
         attachments: [
           {
             filename: 'invoice.pdf',
             content: 'Invoice PDF content',
-            // path: pdfUrl,
+            path,
           },
         ],
       });
