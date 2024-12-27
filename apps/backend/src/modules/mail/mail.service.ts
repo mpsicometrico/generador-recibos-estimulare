@@ -8,7 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { PrinterService } from '@modules/printer/printer.service';
 import { toLocaleDateString } from 'utils/date-functions';
-import { createReadStream, createWriteStream, unlink } from 'fs';
+import { createReadStream, createWriteStream } from 'fs';
 
 @Injectable()
 export class MailService {
