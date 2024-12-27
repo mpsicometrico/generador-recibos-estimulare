@@ -55,6 +55,12 @@ export class PatientController {
   }
 
   @Public()
+  @Get('obtain-debt/:id')
+  obtainDebt(@Param('id', ParseIntPipe) id: number): Promise<number> {
+    return this.service.getDebt(id);
+  }
+
+  @Public()
   @Patch('delete/:id')
   delete(@Param('id', ParseIntPipe) id: number): Promise<Patient> {
     return this.service.delete(id);

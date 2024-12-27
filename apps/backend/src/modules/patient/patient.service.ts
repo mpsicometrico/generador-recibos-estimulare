@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { EntityManager, Repository } from 'typeorm';
 
 import { Patient } from './patient.entity';
 import { CreatePatientDTO, UpdatePatientDTO } from './patient.dto';
@@ -47,7 +47,27 @@ export class PatientService {
 
   async update(body: UpdatePatientDTO, id: number): Promise<Patient> {
     const patient = await this.findById(id);
-    return this.repo.save({ ...patient, ...body });
+    return await this.repo.save({ ...patient, ...body });
+  }
+
+  async updateDebt(
+    transactionalManager: EntityManager,
+    patientId: number,
+    amount: number,
+  ): Promise<void> {
+    const patient = await transactionalManager.findOne(Patient, {
+      where: { id: patientId },
+    });
+
+    patient.debt -= amount;
+
+    await transactionalManager.save(Patient, { ...patient });
+  }
+
+  async getDebt(id: number) {
+    const patient = await this.findById(id);
+
+    return patient.debt;
   }
 
   async delete(id: number): Promise<Patient> {

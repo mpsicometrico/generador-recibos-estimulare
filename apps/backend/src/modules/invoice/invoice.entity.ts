@@ -9,8 +9,11 @@ export class Invoice {
   @Column({ length: 100, type: 'varchar' })
   type: string;
 
-  @Column({ type: 'numeric', precision: 6, scale: 2 })
+  @Column({ type: 'numeric', precision: 7, scale: 2 })
   price: number;
+
+  @Column({ type: 'numeric', precision: 6, scale: 2 })
+  paid: number;
 
   @Column({
     type: 'timestamp without time zone',

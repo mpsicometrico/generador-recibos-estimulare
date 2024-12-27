@@ -26,6 +26,9 @@ export class Patient {
   @Column({ length: 100, type: 'varchar', nullable: true })
   school: string;
 
+  @Column({ type: 'numeric', precision: 7, scale: 2 })
+  debt: number;
+
   @Column({ default: true, type: 'boolean' })
   isActive: boolean;
 

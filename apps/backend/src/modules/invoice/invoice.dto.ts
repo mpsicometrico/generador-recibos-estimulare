@@ -12,7 +12,11 @@ export class CreateInvoiceDTO {
   @IsNotEmpty()
   readonly type: string;
 
-  @ApiProperty({ example: '850.00' })
+  @ApiProperty({ example: '99999.99' })
   @IsDecimal({ decimal_digits: '2' })
   readonly price: number;
+
+  @ApiProperty({ example: '9999.99' })
+  @IsDecimal({ decimal_digits: '2' })
+  readonly paid: number;
 }
