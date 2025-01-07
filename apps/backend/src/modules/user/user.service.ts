@@ -20,9 +20,15 @@ export class UserService {
     private readonly mailService: MailerService,
   ) {}
 
-  async getAll(): Promise<User[]> {
+  async getAll(email?: string): Promise<User[]> {
+    const whereArgs = { isActive: true };
+
+    if (email) {
+      whereArgs['email'] = email;
+    }
+
     return this.repo.find({
-      where: { isActive: true },
+      where: whereArgs,
       select: ['id', 'email', 'name', 'lastName', 'isActive'],
     });
   }

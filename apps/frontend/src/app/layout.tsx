@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import { Toaster } from 'sonner'
 import { NavigationButtons } from '@components/navigation-buttons'
+import AuthProvider from '@providers/AuthProvider'
 
 const interVariable = localFont({
   src: './fonts/Inter-VariableFont_opsz,wght.ttf',
@@ -23,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang='es'>
       <body className={`${interVariable.className} antialiased relative`}>
-        <NavigationButtons />
-        {children}
-        <Toaster richColors />
+        <AuthProvider>
+          <NavigationButtons />
+          {children}
+          <Toaster richColors />
+        </AuthProvider>
       </body>
     </html>
   )

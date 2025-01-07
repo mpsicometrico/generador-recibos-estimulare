@@ -7,9 +7,10 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { CreateUserDTO, UpdateUserDTO } from './user.dto';
 import { type User } from './user.entity';
@@ -23,8 +24,10 @@ export class UserController {
   constructor(private repo: UserService) {}
 
   @Get()
-  getAll(): Promise<User[]> {
-    return this.repo.getAll();
+  @Public()
+  @ApiQuery({ name: 'email', required: false })
+  getAll(@Query('email') email: string): Promise<User[]> {
+    return this.repo.getAll(email);
   }
 
   @Get(':id')

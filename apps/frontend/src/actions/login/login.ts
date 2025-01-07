@@ -1,9 +1,10 @@
 import { toast } from 'sonner'
-import { signIn } from 'next-auth/react'
-import { getServerSession } from 'next-auth'
+import { getSession, signIn } from 'next-auth/react'
 
 export async function login(_previousState: unknown, formData: FormData) {
   const data = Object.fromEntries(formData)
+
+  const session = await getSession()
 
   const { email, password } = data
 
@@ -23,8 +24,9 @@ export async function login(_previousState: unknown, formData: FormData) {
     {
       loading: 'Cargando...',
       success: async () => {
-        console.log(await getServerSession())
-        return `Bienvenido, ${data}.`
+        const { name, lastName } = session!.user
+
+        return `Bienvenido, ${name} ${lastName}.`
       },
       error: () => `Credenciales inválidas.`
     }

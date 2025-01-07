@@ -4,6 +4,7 @@ import { User } from '@modules/user/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { UserSession } from 'models/jwt';
 import { UserService } from '@modules/user/user.service';
+import { Session } from 'types/session';
 @Injectable()
 export class AuthService {
   constructor(
@@ -19,10 +20,11 @@ export class AuthService {
     return null;
   }
 
-  async login(user: User): Promise<{ token: string }> {
-    const payload = { email: user.email, sub: user.id };
+  async login({ id, name, lastName, email }: User): Promise<Session> {
+    const payload = { email: email, sub: id };
     return {
       token: this.jwtService.sign(payload),
+      user: { id, name, lastName, email },
     };
   }
 }
