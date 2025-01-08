@@ -1,7 +1,7 @@
 'use client'
 
 import { registerPsychologist } from '@actions/psychologist/register'
-import { Form, Input } from '@components/index'
+import { Form, Input } from '@components/fields/index'
 
 export default function PsychologistForm() {
   return (

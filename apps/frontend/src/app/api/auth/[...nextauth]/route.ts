@@ -30,7 +30,9 @@ const handler = NextAuth({
         if (!res.ok) {
           throw new Error('Credenciales inválidas')
         }
-        return await res.json()
+
+        const data = await res.json()
+        return data
       }
     })
   ],

@@ -10,6 +10,9 @@
       "@context/*": [
         "./src/context/*"
       ],
+      "@constants/*": [
+        "./src/constants/*"
+      ],
       "@hooks/*": [
         "./src/hooks/*"
       ],

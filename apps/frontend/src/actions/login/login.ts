@@ -4,8 +4,6 @@ import { getSession, signIn } from 'next-auth/react'
 export async function login(_previousState: unknown, formData: FormData) {
   const data = Object.fromEntries(formData)
 
-  const session = await getSession()
-
   const { email, password } = data
 
   if (!email || !password) {
@@ -24,6 +22,7 @@ export async function login(_previousState: unknown, formData: FormData) {
     {
       loading: 'Cargando...',
       success: async () => {
+        const session = await getSession()
         const { name, lastName } = session!.user
 
         return `Bienvenido, ${name} ${lastName}.`

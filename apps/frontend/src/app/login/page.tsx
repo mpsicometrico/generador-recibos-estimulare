@@ -1,18 +1,18 @@
 'use client'
 
-import { Form, Input, Checkbox } from '@components/index'
+import { Form, Input, Checkbox } from '@components/fields/index'
 import { login } from '@actions/login/login'
 import { useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 const Login = () => {
-  const { data: session, status } = useSession()
+  const { status } = useSession()
   const { replace } = useRouter()
 
   useEffect(() => {
     if (status === 'authenticated') {
-      replace('/registrar')
+      replace('/')
     }
   }, [status, replace])
 
