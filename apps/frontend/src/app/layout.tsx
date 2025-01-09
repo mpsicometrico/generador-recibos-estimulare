@@ -26,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='es'>
-      <body className={`${interVariable.className} antialiased relative`}>
+      <body
+        className={`${interVariable.className} antialiased relative max-w-[100dvw] max-h-[100dvh] overflow-hidden`}
+      >
         <AuthProvider>
           <LoadingProvider>
             <Toaster richColors />
