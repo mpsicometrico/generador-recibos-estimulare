@@ -19,7 +19,7 @@ export default function RedirectProvider({ children }: Props) {
 
   return (
     <section
-      className={`w-full h-[${hideNavbar ? '100dvh' : 'calc(100dvh-120px)'}] absolute bottom-0 p-4`}
+      className={`w-full ${hideNavbar ? 'h-dvh' : 'h-main-content'} absolute bottom-0 p-4`}
     >
       {isProtected && status === 'unauthenticated' ? (
         <div className='flex flex-col items-center justify-center h-full gap-4'>

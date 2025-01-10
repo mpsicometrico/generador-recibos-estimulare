@@ -20,7 +20,7 @@ const Login = () => {
 
   if (status === 'unauthenticated')
     return (
-      <section className='max-w-[100dvw] max-h-[100dvh] h-dvh flex justify-center items-center'>
+      <section className='h-full flex justify-center items-center'>
         <div className='w-[90%] h-1/2 flex items-center shadow-xl bg-light-yellow'>
           <section className='w-1/2 h-fit p-[50px]'>
             <h2 className='text-2xl mb-[30px]'>Inicia sesión</h2>
