@@ -1,6 +1,6 @@
 'use client'
 
-import { IconBackArrow } from './icon'
+import { IconBackArrow } from './icons/back-arrow'
 import { useRouter } from 'next/navigation'
 
 export function NavigationButtons() {

@@ -4,7 +4,7 @@ import { Toaster } from 'sonner'
 
 import AuthProvider from '@providers/AuthProvider'
 import LoadingProvider from '@providers/LoadingProvider'
-import RedirectProvider from '@providers/RedirectProvider'
+import Redirect from '@components/redirect/redirect'
 import Navbar from '@components/navbar'
 import './globals.css'
 
@@ -33,7 +33,7 @@ export default function RootLayout({
           <LoadingProvider>
             <Toaster richColors />
             <Navbar />
-            <RedirectProvider>{children}</RedirectProvider>
+            <Redirect>{children}</Redirect>
           </LoadingProvider>
         </AuthProvider>
       </body>
