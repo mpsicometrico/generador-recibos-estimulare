@@ -6,12 +6,13 @@ export default function Input({
   id,
   label,
   className,
+  labelStyle,
   placeholder,
   props
 }: InputProps): React.ReactElement {
   return (
     <div className='flex flex-col'>
-      <label className='cursor-pointer' htmlFor={id}>
+      <label className={`cursor-pointer ${labelStyle}`} htmlFor={id}>
         {label}
       </label>
       <input

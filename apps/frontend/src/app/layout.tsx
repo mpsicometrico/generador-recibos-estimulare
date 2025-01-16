@@ -15,7 +15,7 @@ const interVariable = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Generador de Recibos Electrónicos - Estimulare',
+  title: 'Generador de Recibos Electrónicos - Stimulare',
   description: 'Generador de Recibos electrónicos.'
 }
 

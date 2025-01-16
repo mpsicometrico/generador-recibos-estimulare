@@ -37,3 +37,13 @@
     transform: rotate(360deg);
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .loader {
+    border-color: black;
+  }
+
+  .loader::after {
+    background-color: black;
+  }
+}
