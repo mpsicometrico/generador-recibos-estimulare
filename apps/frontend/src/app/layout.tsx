@@ -5,7 +5,7 @@ import { Toaster } from 'sonner'
 import AuthProvider from '@providers/AuthProvider'
 import LoadingProvider from '@providers/LoadingProvider'
 import Redirect from '@components/redirect/redirect'
-import Navbar from '@components/navbar'
+import Header from '@components/header'
 import './globals.css'
 
 const interVariable = localFont({
@@ -27,12 +27,12 @@ export default function RootLayout({
   return (
     <html lang='es'>
       <body
-        className={`${interVariable.className} antialiased relative max-w-[100dvw] max-h-[100dvh] overflow-hidden`}
+        className={`${interVariable.className} h-[100dvh] max-h-[100dvh] antialiased overflow-hidden flex flex-col`}
       >
         <AuthProvider>
           <LoadingProvider>
             <Toaster richColors />
-            <Navbar />
+            <Header />
             <Redirect>{children}</Redirect>
           </LoadingProvider>
         </AuthProvider>

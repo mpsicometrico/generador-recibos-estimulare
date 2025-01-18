@@ -4,8 +4,7 @@ import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 
-import { hideNavbarRoutes, protectedRoutes } from '@constants/routing'
-import styles from './redirect.module.css'
+import { protectedRoutes } from '@constants/routing'
 
 interface Props {
   children: React.ReactNode
@@ -16,14 +15,11 @@ export default function Redirect({ children }: Props) {
   const { status } = useSession()
 
   const isProtected = protectedRoutes.includes(pathname)
-  const hideNavbar = hideNavbarRoutes.includes(pathname)
 
   return (
-    <section
-      className={`w-full ${hideNavbar ? 'h-dvh' : styles.h_outlet} absolute bottom-0 p-4`}
-    >
+    <section className={`p-4 h-full`}>
       {isProtected && status === 'unauthenticated' ? (
-        <div className='flex flex-col items-center justify-center h-full gap-4'>
+        <div className='items-center justify-center h-full gap-4'>
           <h2>Sin acceso</h2>
           <p>No estás autorizado a ver esta página.</p>
           <Link href='/login'>

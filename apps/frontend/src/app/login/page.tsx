@@ -20,8 +20,8 @@ const Login = () => {
 
   if (status === 'unauthenticated')
     return (
-      <section className='h-full flex justify-center items-center'>
-        <div className='w-[90%] h-1/2 flex items-center shadow-xl bg-light-yellow'>
+      <section className='flex justify-center items-center h-full'>
+        <div className='w-[90%] h-1/2 flex items-center shadow-xl bg-light-yellow self-center justify-self-center'>
           <section className='w-1/2 h-fit p-[50px]'>
             <h2 className='text-2xl mb-[30px]'>Inicia sesión</h2>
             <Form hasSubmit action={login}>
@@ -38,7 +38,7 @@ const Login = () => {
             </Form>
           </section>
           <section className='w-1/2 h-full flex flex-col justify-center items-center content-center bg-pink gap-1 text-white'>
-            <h2 className='text-2xl mb-[30px] '>Bienvenido a Estimulare.</h2>
+            <h2 className='text-2xl mb-[30px] '>Bienvenido a Stimulare.</h2>
             <p>¿No tienes una cuenta?</p>
             <p>Contacta a un administrador.</p>
           </section>

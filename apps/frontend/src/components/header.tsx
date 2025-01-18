@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 
-export default function Navbar() {
+export default function Header() {
   const { replace } = useRouter()
   const pathname = usePathname()
   const { status } = useSession()
@@ -15,7 +15,7 @@ export default function Navbar() {
   if (hideNavbarRoutes.includes(pathname)) return null
 
   return (
-    <section className='w-full h-[120px] border-b-[1px] border-solid border-black'>
+    <header className='w-full h-[120px] border-b-[1px] border-solid border-black'>
       <nav className='flex justify-between h-[56px] shadow-sm p-4'>
         <RouteList routes={navigationRoutes} />
         {status === 'authenticated' && (
@@ -34,6 +34,6 @@ export default function Navbar() {
         )}
       </nav>
       <NavigationButtons />
-    </section>
+    </header>
   )
 }

@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .h-full-outlet {
-    height: calc(100dvh - 120px);
-  }
-}
-
 :root {
   --foreground: #171717;
   --yellow: #FFE893;
@@ -16,9 +10,14 @@
   --light-pink: #FBB4A5;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   color: var(--foreground);
-  background: var(--light-pink);
+  background: white;
   font-family: Arial, Helvetica, sans-serif;
-  min-height: 100dvh;
 }
