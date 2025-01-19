@@ -1,11 +1,8 @@
 'use client'
 
-import { registerPatient } from '@actions/patient/register'
-import { Form, Input } from '@components/fields/index'
-import Select from '@components/fields/select'
-import ListView from '@components/list-view'
+import { ListView } from '@components/index'
 import { Entities } from '@constants/entities'
 
 export default function PatientHome() {
-  return <ListView />
+  return <ListView entity={Entities.Patient} />
 }

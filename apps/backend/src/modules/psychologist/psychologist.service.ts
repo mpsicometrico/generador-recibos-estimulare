@@ -19,9 +19,13 @@ export class PsychologistService {
   async create(
     createPsychologistDto: CreatePsychologistDTO,
   ): Promise<Psychologist> {
-    const exists = await this.repo.findOne({
-      where: { email: createPsychologistDto.email },
-    });
+    const { email } = createPsychologistDto;
+    const exists =
+      email !== null
+        ? await this.repo.findOne({
+            where: { email: email },
+          })
+        : false;
     if (exists)
       throw new ConflictException({
         message: 'El correo ya se encuentra registrado.',

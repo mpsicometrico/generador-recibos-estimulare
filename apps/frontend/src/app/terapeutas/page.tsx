@@ -1,18 +1,8 @@
 'use client'
 
-import { registerPsychologist } from '@actions/psychologist/register'
-import { Form, Input } from '@components/fields/index'
+import { ListView } from '@components/index'
+import { Entities } from '@constants/entities'
 
 export default function PsychologistForm() {
-  return (
-    <div className='grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
-      <main className='flex flex-col gap-8 row-start-2 items-center sm:items-start'>
-        <Form action={registerPsychologist}>
-          <Input id='name' label='Nombre de la psicóloga / psicólogo *' />
-          <Input id='lastName' label='Apellidos *' />
-          <Input id='email' label='Correo electrónico' />
-        </Form>
-      </main>
-    </div>
-  )
+  return <ListView entity={Entities.Psychologist} />
 }

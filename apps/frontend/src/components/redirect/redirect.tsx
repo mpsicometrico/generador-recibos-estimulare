@@ -17,7 +17,7 @@ export default function Redirect({ children }: Props) {
   const isProtected = protectedRoutes.includes(pathname)
 
   return (
-    <section className={`p-4 h-full`}>
+    <section className={`p-4 flex-1`}>
       {isProtected && status === 'unauthenticated' ? (
         <div className='items-center justify-center h-full gap-4'>
           <h2>Sin acceso</h2>

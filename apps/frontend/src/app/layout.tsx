@@ -7,6 +7,7 @@ import LoadingProvider from '@providers/LoadingProvider'
 import Redirect from '@components/redirect/redirect'
 import Header from '@components/header'
 import './globals.css'
+import { DialogProvider } from '@providers/dialog-provider'
 
 const interVariable = localFont({
   src: '../fonts/Inter-VariableFont_opsz,wght.ttf',
@@ -27,13 +28,15 @@ export default function RootLayout({
   return (
     <html lang='es'>
       <body
-        className={`${interVariable.className} h-[100dvh] max-h-[100dvh] antialiased overflow-hidden flex flex-col`}
+        className={`${interVariable.className} h-[100dvh] max-h-[100dvh] antialiased overflow-hidden relative`}
       >
         <AuthProvider>
           <LoadingProvider>
             <Toaster richColors />
             <Header />
-            <Redirect>{children}</Redirect>
+            <Redirect>
+              <DialogProvider>{children}</DialogProvider>
+            </Redirect>
           </LoadingProvider>
         </AuthProvider>
       </body>

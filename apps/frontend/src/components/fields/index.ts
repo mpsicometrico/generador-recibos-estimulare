@@ -1,5 +1,5 @@
-import Form from '../form'
-import Input from './input'
 import Checkbox from './checkbox'
+import Input from './input'
+import Select from './select'
 
-export { Input, Form, Checkbox }
+export { Checkbox, Input, Select }

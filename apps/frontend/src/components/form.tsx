@@ -8,8 +8,9 @@ export default function Form({
   hasSubmit = false,
   children
 }: FormProps): React.ReactElement {
-  const [, formAction, isPending] = useActionState(action, undefined)
+  const [state, formAction, isPending] = useActionState(action, undefined)
 
+  console.log(state)
   return (
     <form action={formAction} className='flex flex-col gap-5'>
       {children}

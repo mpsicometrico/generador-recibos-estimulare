@@ -7,8 +7,8 @@
       "@components/*": [
         "./src/components/*"
       ],
-      "@context/*": [
-        "./src/context/*"
+      "@contexts/*": [
+        "./src/contexts/*"
       ],
       "@constants/*": [
         "./src/constants/*"
