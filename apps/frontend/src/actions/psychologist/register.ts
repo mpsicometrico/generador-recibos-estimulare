@@ -16,19 +16,19 @@ export async function registerPsychologist(
   }
 
   const payload = falsyToNull(data)
-  let message
-  const test = toast.promise(psychologistService.register(payload), {
-    loading: 'Registrando terapeuta...',
-    success: (data) => {
-      const { name, lastName } = data.data
-      message = 'success'
-      return `El terapeuta ${name} ${lastName} ha sido registrado correctamente.`
-    },
-    error: (e) => {
-      message = 'error'
-      return `Ocurrió un error al registrar al terapeuta: ${e.response.data.message}`
-    }
-  })
+  const test = toast
+    .promise(psychologistService.register(payload), {
+      loading: 'Registrando terapeuta...',
+      success: (data) => {
+        const { name, lastName } = data.data
+        return `El terapeuta ${name} ${lastName} ha sido registrado correctamente.`
+      },
+      error: (e) =>
+        `Ocurrió un error al registrar al terapeuta: ${e.response.data.message}`
+    })
+    .unwrap()
+    .then(() => 'success')
+    .catch(() => 'error')
 
   return test
 }

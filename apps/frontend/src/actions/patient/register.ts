@@ -22,13 +22,17 @@ export async function registerPatient(
     psychologistId: Number(psychologistId)
   }
 
-  toast.promise(patientService.register(payload), {
-    loading: 'Registrando paciente...',
-    success: (data) => {
-      const { name } = data.data
-      return `El paciente ${name} ha sido registrado correctamente.`
-    },
-    error: (e) =>
-      `Ocurrió un error al registrar al paciente: ${e.response?.data.message.join(', ')}`
-  })
+  return toast
+    .promise(patientService.register(payload), {
+      loading: 'Registrando paciente...',
+      success: (data) => {
+        const { name } = data.data
+        return `El paciente ${name} ha sido registrado correctamente.`
+      },
+      error: (e) =>
+        `Ocurrió un error al registrar al paciente: ${e.response?.data.message.join(', ')}`
+    })
+    .unwrap()
+    .then(() => 'success')
+    .catch(() => 'error')
 }

@@ -22,13 +22,17 @@ export async function registerInvoice(
     patientId: Number(data.patientId)
   }
 
-  toast.promise(invoiceService.register(payload), {
-    loading: 'Registrando recibo...',
-    success: (data) => {
-      const { id } = data.data
-      return `El recibo ${id} ha sido registrado correctamente.`
-    },
-    error: (e) =>
-      `Ocurrió un error al registrar el recibo: ${e.response?.data.message.join(', ')}`
-  })
+  toast
+    .promise(invoiceService.register(payload), {
+      loading: 'Registrando recibo...',
+      success: (data) => {
+        const { id } = data.data
+        return `El recibo ${id} ha sido registrado correctamente.`
+      },
+      error: (e) =>
+        `Ocurrió un error al registrar el recibo: ${e.response?.data.message.join(', ')}`
+    })
+    .unwrap()
+    .then(() => 'success')
+    .catch(() => 'error')
 }
